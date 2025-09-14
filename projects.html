@@ -38,6 +38,208 @@
     <!-- Main CSS File -->
     <link href="assets/css/main.css" rel="stylesheet" />
 
+    <style>
+      /*--------------------------------------------------------------
+      # Portfolio Section - Fixed Equal Heights
+      --------------------------------------------------------------*/
+
+      /* Make Bootstrap row use flexbox with equal heights */
+      .portfolio .isotope-container {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      /* Ensure Bootstrap columns stretch to full height */
+      .portfolio .portfolio-item {
+        display: flex;
+      }
+
+      .portfolio .portfolio-filters {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 30px;
+        padding: 0;
+        list-style: none;
+      }
+
+      .portfolio .portfolio-filters li {
+        padding: 8px 20px;
+        font-size: 0.95rem;
+        font-weight: 500;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background-color: color-mix(
+          in srgb,
+          var(--accent-color),
+          transparent 90%
+        );
+        color: var(--accent-color);
+      }
+
+      .portfolio .portfolio-filters li:hover {
+        background-color: color-mix(
+          in srgb,
+          var(--accent-color),
+          transparent 80%
+        );
+      }
+
+      .portfolio .portfolio-filters li.filter-active {
+        background-color: var(--accent-color);
+        color: var(--contrast-color);
+      }
+
+      .portfolio .portfolio-card {
+        background-color: var(--surface-color);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        margin-bottom: 30px;
+        transition: all 0.3s ease;
+        /* Make card a flex container with column direction */
+        display: flex;
+        flex-direction: column;
+        height: 100%; /* Take full height of Bootstrap column */
+        width: 100%;
+      }
+
+      .portfolio .portfolio-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .portfolio .portfolio-card:hover .portfolio-img .portfolio-overlay {
+        opacity: 1;
+      }
+
+      .portfolio .portfolio-card:hover .portfolio-img img {
+        transform: scale(1.1);
+      }
+
+      .portfolio .portfolio-card .portfolio-img {
+        position: relative;
+        overflow: hidden;
+        /* Fixed aspect ratio for images */
+        aspect-ratio: 16/9;
+      }
+
+      .portfolio .portfolio-card .portfolio-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Maintain aspect ratio and fill container */
+        transition: transform 0.5s ease;
+      }
+
+      .portfolio .portfolio-card .portfolio-img .portfolio-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        opacity: 0;
+        transition: all 0.3s ease;
+      }
+
+      .portfolio .portfolio-card .portfolio-img .portfolio-overlay a {
+        width: 45px;
+        height: 45px;
+        background-color: var(--accent-color);
+        color: var(--contrast-color);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+      }
+
+      .portfolio .portfolio-card .portfolio-img .portfolio-overlay a:hover {
+        background-color: color-mix(in srgb, var(--accent-color), #fff 20%);
+        transform: translateY(-5px);
+      }
+
+      .portfolio .portfolio-card .portfolio-info {
+        padding: 20px;
+        /* Make this flex and grow to fill remaining space */
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
+
+      .portfolio .portfolio-card .portfolio-info h4 {
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-bottom: 5px;
+        color: var(--heading-color);
+      }
+
+      .portfolio .portfolio-card .portfolio-info p {
+        font-size: 0.9rem;
+        color: var(--default-color);
+        margin-bottom: 10px;
+        /* Allow description to grow and push tags to bottom */
+        flex: 1;
+      }
+
+      .portfolio .portfolio-card .portfolio-info .portfolio-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        /* Keep tags at bottom */
+        margin-top: auto;
+      }
+
+      .portfolio .portfolio-card .portfolio-info .portfolio-tags span {
+        font-size: 0.8rem;
+        padding: 4px 12px;
+        border-radius: 20px;
+        background-color: color-mix(
+          in srgb,
+          var(--accent-color),
+          transparent 90%
+        );
+        color: var(--accent-color);
+      }
+
+      .portfolio .btn-primary {
+        background-color: var(--accent-color);
+        border-color: var(--accent-color);
+        color: var(--contrast-color);
+        padding: 12px 30px;
+        font-weight: 600;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+      }
+
+      .portfolio .btn-primary:hover {
+        background-color: color-mix(in srgb, var(--accent-color), #000 10%);
+        border-color: color-mix(in srgb, var(--accent-color), #000 10%);
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Alternative: If you prefer CSS Grid instead of Bootstrap, use this */
+      /*
+      .portfolio .isotope-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+      }
+
+      .portfolio .portfolio-item {
+        display: block;
+      }
+      */
+    </style>
+
     <!-- =======================================================
   * Template Name: FolioOne
   * Template URL: https://bootstrapmade.com/folioone-bootstrap-portfolio-website-template/
@@ -66,18 +268,18 @@
             <li><a href="about.html">About</a></li>
             <li><a href="resume.html">Resume</a></li>
             <li><a href="services.html">Services</a></li>
-            <li><a href="portfolio.html" class="active">Portfolio</a></li>
+            <li><a href="projects.html" class="active">Projects</a></li>
 
             <li><a href="contact.html">Contact</a></li>
           </ul>
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
 
-        <div class="header-social-links">
-          <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
-          <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-          <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-          <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+        <div class="social-links">
+          <a href="https://github.com/a7med-22"><i class="bi bi-github"></i></a>
+          <a href="www.linkedin.com/in/ahmedosama222"
+            ><i class="bi bi-linkedin"></i
+          ></a>
         </div>
       </div>
     </header>
@@ -87,7 +289,7 @@
       <section id="portfolio" class="portfolio section">
         <!-- Section Title -->
         <div class="container section-title" data-aos="fade-up">
-          <h2>Portfolio</h2>
+          <h2>Projects</h2>
           <p>
             Explore my collection of fullstack web applications built with
             modern technologies including React, Next.js, Node.js, Express,
@@ -104,16 +306,17 @@
             data-layout="masonry"
             data-sort="original-order"
           >
+            <!-- Portfolio Filters -->
             <ul
               class="portfolio-filters isotope-filters"
               data-aos="fade-up"
               data-aos-delay="200"
             >
               <li data-filter="*" class="filter-active">All</li>
+              <li data-filter=".filter-web">Web Development</li>
               <li data-filter=".filter-react">React</li>
               <li data-filter=".filter-nextjs">Next.js</li>
-              <li data-filter=".filter-fullstack">Full Stack</li>
-              <li data-filter=".filter-ecommerce">E-commerce</li>
+              <li data-filter=".filter-landing">Landing Pages</li>
             </ul>
             <!-- End Portfolio Filters -->
 
@@ -122,19 +325,20 @@
               data-aos="fade-up"
               data-aos-delay="300"
             >
+              <!-- Digital Agency Project -->
               <div
-                class="col-lg-4 col-md-6 portfolio-item isotope-item filter-ecommerce filter-fullstack"
+                class="col-lg-4 col-md-6 portfolio-item isotope-item filter-web filter-landing"
               >
                 <div class="portfolio-card">
                   <div class="portfolio-img">
                     <img
-                      src="assets/img/portfolio/portfolio-1.webp"
-                      alt="E-commerce Platform"
+                      src="assets/img/projects/doobie.png"
+                      alt="doobie.png"
                       class="img-fluid"
                     />
                     <div class="portfolio-overlay">
                       <a
-                        href="assets/img/portfolio/portfolio-1.webp"
+                        href="assets/img/projects/doobie.png"
                         class="glightbox portfolio-lightbox"
                         ><i class="bi bi-plus"></i
                       ></a>
@@ -144,30 +348,32 @@
                     </div>
                   </div>
                   <div class="portfolio-info">
-                    <h4>Modern E-commerce Platform</h4>
-                    <p>Full Stack Development</p>
+                    <h4>The Spirit Of Digital Agency</h4>
+                    <p>
+                      Digital agency website with modern design and branding
+                    </p>
                     <div class="portfolio-tags">
-                      <span>React</span>
-                      <span>Node.js</span>
-                      <span>MongoDB</span>
+                      <span>HTML</span>
+                      <span>CSS</span>
                     </div>
                   </div>
                 </div>
               </div>
 
+              <!-- Finder Project -->
               <div
-                class="col-lg-4 col-md-6 portfolio-item isotope-item filter-nextjs filter-react"
+                class="col-lg-4 col-md-6 portfolio-item isotope-item filter-web filter-landing"
               >
                 <div class="portfolio-card">
                   <div class="portfolio-img">
                     <img
-                      src="assets/img/portfolio/portfolio-2.webp"
+                      src="assets/img/projects/Finder.png"
                       alt="SaaS Dashboard"
                       class="img-fluid"
                     />
                     <div class="portfolio-overlay">
                       <a
-                        href="assets/img/portfolio/portfolio-2.webp"
+                        href="assets/img/projects/Finder.png"
                         class="glightbox portfolio-lightbox"
                         ><i class="bi bi-plus"></i
                       ></a>
@@ -177,30 +383,31 @@
                     </div>
                   </div>
                   <div class="portfolio-info">
-                    <h4>SaaS Analytics Dashboard</h4>
-                    <p>Next.js Application</p>
+                    <h4>Finder – Certified Pros Nearby</h4>
+                    <p>Local Services & Home Improvement</p>
                     <div class="portfolio-tags">
-                      <span>Next.js</span>
-                      <span>MySQL</span>
-                      <span>API</span>
+                      <span>HTML</span>
+                      <span>CSS</span>
+                      <span>JS</span>
                     </div>
                   </div>
                 </div>
               </div>
 
+              <!-- VirtualR Project -->
               <div
-                class="col-lg-4 col-md-6 portfolio-item isotope-item filter-fullstack filter-react"
+                class="col-lg-4 col-md-6 portfolio-item isotope-item filter-react filter-web"
               >
                 <div class="portfolio-card">
                   <div class="portfolio-img">
                     <img
-                      src="assets/img/portfolio/portfolio-3.webp"
+                      src="assets/img/projects/virtualR.png"
                       alt="Task Management App"
                       class="img-fluid"
                     />
                     <div class="portfolio-overlay">
                       <a
-                        href="assets/img/portfolio/portfolio-3.webp"
+                        href="assets/img/projects/virtualR.png"
                         class="glightbox portfolio-lightbox"
                         ><i class="bi bi-plus"></i
                       ></a>
@@ -210,30 +417,31 @@
                     </div>
                   </div>
                   <div class="portfolio-info">
-                    <h4>Team Task Management App</h4>
-                    <p>Real-time Collaboration</p>
+                    <h4>VirtualR – Build Tools for Developers</h4>
+                    <p>VR App Development & Immersive Solutions</p>
                     <div class="portfolio-tags">
                       <span>React</span>
-                      <span>Express</span>
-                      <span>WebSocket</span>
+                      <span>Tailwind</span>
+                      <span>Vite</span>
                     </div>
                   </div>
                 </div>
               </div>
 
+              <!-- Vitapsyche Project -->
               <div
-                class="col-lg-4 col-md-6 portfolio-item isotope-item filter-nextjs filter-ecommerce"
+                class="col-lg-4 col-md-6 portfolio-item isotope-item filter-nextjs filter-react filter-web"
               >
                 <div class="portfolio-card">
                   <div class="portfolio-img">
                     <img
-                      src="assets/img/portfolio/portfolio-4.webp"
+                      src="assets/img/projects/vitapsyche.png"
                       alt="Restaurant Booking System"
                       class="img-fluid"
                     />
                     <div class="portfolio-overlay">
                       <a
-                        href="assets/img/portfolio/portfolio-4.webp"
+                        href="assets/img/projects/vitapsyche.png"
                         class="glightbox portfolio-lightbox"
                         ><i class="bi bi-plus"></i
                       ></a>
@@ -243,78 +451,16 @@
                     </div>
                   </div>
                   <div class="portfolio-info">
-                    <h4>Restaurant Booking System</h4>
-                    <p>Online Reservations</p>
+                    <h4>Vitapsyche Mental Health Platform</h4>
+                    <p>
+                      Developed the frontend of an AI-driven platform offering
+                      psychological assessments and doctor access
+                    </p>
+
                     <div class="portfolio-tags">
                       <span>Next.js</span>
-                      <span>MongoDB</span>
-                      <span>Payments</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div
-                class="col-lg-4 col-md-6 portfolio-item isotope-item filter-react filter-fullstack"
-              >
-                <div class="portfolio-card">
-                  <div class="portfolio-img">
-                    <img
-                      src="assets/img/portfolio/portfolio-5.webp"
-                      alt="Social Media Platform"
-                      class="img-fluid"
-                    />
-                    <div class="portfolio-overlay">
-                      <a
-                        href="assets/img/portfolio/portfolio-5.webp"
-                        class="glightbox portfolio-lightbox"
-                        ><i class="bi bi-plus"></i
-                      ></a>
-                      <a href="#" class="portfolio-details-link"
-                        ><i class="bi bi-link"></i
-                      ></a>
-                    </div>
-                  </div>
-                  <div class="portfolio-info">
-                    <h4>Social Media Platform</h4>
-                    <p>Community Building</p>
-                    <div class="portfolio-tags">
-                      <span>React</span>
-                      <span>Node.js</span>
-                      <span>MySQL</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div
-                class="col-lg-4 col-md-6 portfolio-item isotope-item filter-nextjs filter-fullstack"
-              >
-                <div class="portfolio-card">
-                  <div class="portfolio-img">
-                    <img
-                      src="assets/img/portfolio/portfolio-6.webp"
-                      alt="Learning Management System"
-                      class="img-fluid"
-                    />
-                    <div class="portfolio-overlay">
-                      <a
-                        href="assets/img/portfolio/portfolio-6.webp"
-                        class="glightbox portfolio-lightbox"
-                        ><i class="bi bi-plus"></i
-                      ></a>
-                      <a href="#" class="portfolio-details-link"
-                        ><i class="bi bi-link"></i
-                      ></a>
-                    </div>
-                  </div>
-                  <div class="portfolio-info">
-                    <h4>Learning Management System</h4>
-                    <p>Educational Platform</p>
-                    <div class="portfolio-tags">
-                      <span>Next.js</span>
-                      <span>Express</span>
-                      <span>MongoDB</span>
+                      <span>Tailwind</span>
+                      <span>API Integration</span>
                     </div>
                   </div>
                 </div>
